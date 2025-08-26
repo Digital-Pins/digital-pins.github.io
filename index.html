@@ -1,143 +1,301 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Digital Pin – Docs</title>
-
-  <!-- Tailwind via CDN (docs-style) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digital PIN LLC — Docs Hub</title>
+  <meta name="description" content="Digital PIN LLC — Docs-style front interface for our GitHub & Dev Hub" />
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
   <style>
     :root{
-      --brand-blue: #0A47A3;
-      --brand-green:#09A66D;
+      --dp-blue:#0A47A3; /* primary blue */
+      --dp-green:#09A66D; /* bridge green */
+      --dp-ink:#0f172a;  /* slate-900 */
+      --dp-gray:#64748b; /* slate-500 */
+      --ring:0 0 0 3px rgba(9,166,109,.25);
     }
-    html[dir="rtl"] body { direction: rtl; text-align: right; }
-    .docs-container{ max-width: 980px; margin: 2.5rem auto; }
-    /* small docs-y header */
-    .header-card{ background: linear-gradient(180deg,#ffffff,#f7fbff); border:1px solid rgba(10,36,90,0.06); border-radius:10px; padding:12px 16px; display:flex; gap:12px; align-items:center; }
-    .logo-wrap img{ width:140px; height:auto; display:block }
-    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:0.85rem; background:#f3f4f6; padding:2px 8px; border-radius:6px; }
-    /* docs nav */
-    nav a { color: #0f172a; }
-    /* small utility for LTR preview */
-    [dir="ltr"] .rtl-only { display:none; }
-    [dir="rtl"] .ltr-only { display:none; }
-    /* when toggled to ltr we flip */
-    .lang-toggle { background:transparent; border:1px solid rgba(10,36,90,0.08); padding:6px 10px; border-radius:8px; cursor:pointer; }
+    .brand-bg{background:linear-gradient(135deg,var(--dp-blue),#123e7a);} 
+    .brand-pill{background:linear-gradient(90deg,var(--dp-green),#15c78a);} 
+    .linkish{color:var(--dp-blue)}
+    .linkish:hover{color:#082f6b}
+    .card{border:1px solid #e5e7eb;border-radius:1rem;box-shadow:0 2px 10px rgba(2,6,23,.04)}
+    .badge{display:inline-block;border:1px solid #e5e7eb;border-radius:999px;padding:.15rem .6rem;font-size:.75rem;color:#334155;background:#f8fafc}
+    .toc a{display:block;padding:.35rem .5rem;border-radius:.5rem}
+    .toc a:hover{background:#f1f5f9}
+    .focus-ring:focus{outline:none;box-shadow:var(--ring)}
+    /* EN mode (LTR) support */
+    html[lang="en"][dir="ltr"] .rtl-only{display:none}
+    html[lang="ar"][dir="rtl"] .ltr-only{display:none}
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased">
-  <div class="docs-container px-4">
-    <header class="header-card">
-      <div class="logo-wrap" aria-hidden>
-        <!-- embedded SVG logo (data URI) -->
-        <img alt="Digital PIN" src="data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%2036'%3E%3Cpath%20d='M80%202%20L95%2010%20L105%2028%20L80%2034%20L55%2028%20L65%2010%20Z'%20fill='%230A47A3'/%3E%3Ccircle%20cx='80'%20cy='15'%20r='5'%20fill='%2309A66D'/%3E%3C/svg%3E" />
-      </div>
-
-      <div class="flex-1">
-        <h1 class="text-xl font-semibold" id="site-title">Digital PIN — وثائق</h1>
-        <p class="text-sm text-slate-600 rtl-only">واجهة توثيق مبسطة، RTL افتراضيًا. ألوان البراند مفعّلة.</p>
-        <p class="text-sm text-slate-600 ltr-only">Docs-style interface, LTR mode.</p>
-      </div>
-
+<body class="min-h-screen bg-white text-slate-900">
+  <!-- Header -->
+  <header class="sticky top-0 z-40 border-b bg-white/90 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
       <div class="flex items-center gap-3">
-        <button id="toggleLang" class="lang-toggle" aria-pressed="false" title="تبديل اللغة">English / العربية</button>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAuh0hRg+YkTMDkfdexYW+ByOrI5Z9RwAt9sNkVCIiopyEASBfv0HYNfO5mlrqVQqp...pAEACGEEKIOSQAQQggh6pAEACGEEKIO/X/wW7Nuf8ZN+QAAAABJRU5ErkJggg==" alt="Digital PIN Shield" class="h-10 w-10 rounded"/>
+        <div class="text-xl font-extrabold tracking-tight"><span class="text-slate-900">Digital</span> <span class="text-[var(--dp-green)]">PIN</span></div>
       </div>
-    </header>
+      <div class="flex items-center gap-2 text-sm">
+        <button id="btn-ar" class="focus-ring rounded-lg border px-2 py-1">العربية</button>
+  <button id="btn-en" class="focus-ring rounded-lg border px-2 py-1">English</button>
+  <a href="https://github.com/Digital-Pins" target="_blank" rel="noopener noreferrer" class="ml-3 hidden rounded-lg border px-3 py-1 md:block hover:bg-slate-50">GitHub</a>
+      </div>
+    </div>
+  </header>
 
-    <main class="mt-6 grid gap-6 md:grid-cols-3">
-      <aside class="md:col-span-1">
-        <nav class="sticky top-6 bg-white p-4 rounded-lg shadow-sm border">
-          <ul class="space-y-2 text-sm">
-            <li><a class="block py-2 px-2 hover:bg-slate-50 rounded" href="#overview">نظرة عامة</a></li>
-            <li><a class="block py-2 px-2 hover:bg-slate-50 rounded" href="#install">كيفية النشر</a></li>
-            <li><a class="block py-2 px-2 hover:bg-slate-50 rounded" href="#palette">اللوحة اللونية</a></li>
-            <li><a class="block py-2 px-2 hover:bg-slate-50 rounded" href="#license">ملاحظات</a></li>
-          </ul>
+  <!-- Body -->
+  <div class="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-8 md:grid-cols-[270px_1fr] md:px-6">
+    <!-- Sidebar -->
+    <aside class="md:sticky md:top-20 md:h-[calc(100vh-6rem)] md:overflow-auto">
+      <div class="card p-4">
+        <div class="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">فهرس المحتوى</div>
+        <nav class="toc space-y-1 text-sm">
+          <a href="#welcome">الترحيب</a>
+          <a href="#about">من نحن</a>
+          <a href="#vision">الرؤية</a>
+          <a href="#mission">الرسالة</a>
+          <a href="#values">القيم</a>
+          <a href="#services">خدماتنا</a>
+          <a href="#projects">مشروعاتنا</a>
+          <a href="#incubator">البيئة الحاضنة</a>
+          <a href="#partners">شركاؤنا</a>
+          <a href="#management">الهيكل الإداري</a>
+          <a href="#contact">التواصل</a>
         </nav>
-      </aside>
+        <div class="mt-4 grid grid-cols-1 gap-2 text-sm">
+          <a href="https://github.com/Digital-Pins" target="_blank" rel="noopener noreferrer" class="focus-ring rounded-lg border px-3 py-2 text-center hover:bg-slate-50">منظمة GitHub</a>
+          <a href="https://erp.digitalpin.online" target="_blank" rel="noopener noreferrer" class="focus-ring rounded-lg border px-3 py-2 text-center hover:bg-slate-50">DevHub (Staging)</a>
+          <a href="https://4egtrust.com" target="_blank" rel="noopener noreferrer" class="focus-ring rounded-lg border px-3 py-2 text-center hover:bg-slate-50">4egtrust.com</a>
+        </div>
+      </div>
+    </aside>
 
-      <section class="md:col-span-2 bg-white p-6 rounded-lg shadow-sm border">
-        <article id="overview" class="prose prose-sm max-w-none">
-          <h2 class="!mt-0">نظرة عامة</h2>
-          <p class="leading-relaxed">هذه صفحة وثائق أحادية الملف مناسبة للنشر مباشرة على GitHub Pages. الواجهة مصممة RTL بشكل افتراضي مع زر تبديل للإنجليزية. لا تحتاج إلى أصول خارجية — الشعار مضمّن داخل الملف.</p>
+    <!-- Main content -->
+    <main class="prose max-w-none prose-h1:mt-0 prose-h2:mt-0 prose-p:text-slate-700">
+      <!-- Welcome -->
+      <section id="welcome">
+        <h1 class="mb-2 text-3xl font-extrabold tracking-tight">مرحبًا بكم في Digital PIN LLC</h1>
+        <p class="lead text-lg">نقترب من تحدّياتكم بقدر ما نقترب من حلولها. مع كل خطوة، نفتح الطريق من الرؤية إلى الإنجاز — ببساطة، وبأمان، وبثقة.</p>
+        <p class="ltr-only text-sm text-slate-500">Welcome to Digital PIN LLC — we stand as close to your challenges as we are to their solutions. Your path from vision to achievement is simple, secure, and trusted.</p>
+      </section>
 
-          <h3>مزايا</h3>
-          <ul>
-            <li>صفحة ثابتة، سهلة النشر على GitHub Pages.</li>
-            <li>RTL افتراضي مع دعم تبديل اللغة إلى LTR/EN.</li>
-            <li>ألوان العلامة التجارية مطبقة: <span class="kbd">#0A47A3</span> و <span class="kbd">#09A66D</span>.</li>
-          </ul>
-        </article>
+      <!-- About -->
+      <section id="about">
+        <h2>من نحن</h2>
+        <p>Digital PIN LLC شركة مصرية ذات مسؤولية محدودة، تبني الجسر بين الفكرة والواقع. نمزج إدارة المشروعات بالأنظمة الرقمية والحلول الهندسية لنقدّم نتائج متكاملة وعالية الجودة.</p>
+      </section>
 
-        <article id="install" class="mt-6 prose prose-sm max-w-none">
-          <h2>كيفية النشر</h2>
-          <ol>
-            <li>أنشئ repo باسم مثل <strong>digital-pins.github.io</strong> أو فعّل GitHub Pages على أي repo.</li>
-            <li>ضع هذا الملف كـ <code>index.html</code> على الفرع الذي تخدمه Pages (عادة <code>main</code> أو <code>gh-pages</code>).</li>
-            <li>انتظر بضع دقائق ثم زر عنوان Pages.</li>
-          </ol>
-
-          <h3>اختبار محلي سريع</h3>
-          <pre class="bg-slate-100 p-3 rounded"><code>python3 -m http.server 8000
-# ثم فتح http://localhost:8000</code></pre>
-        </article>
-
-        <article id="palette" class="mt-6 prose prose-sm max-w-none">
-          <h2>لوحة الألوان</h2>
-          <div class="flex gap-3 items-center">
-            <div style="background:var(--brand-blue);width:64px;height:32px;border-radius:6px"></div>
-            <div style="background:var(--brand-green);width:64px;height:32px;border-radius:6px"></div>
-            <div class="text-sm text-slate-600">#0A47A3 &nbsp;•&nbsp; #09A66D</div>
+      <!-- Vision -->
+      <section id="vision">
+        <h2>رؤيتنا</h2>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="card p-4">
+            <h3 class="m-0 text-base font-semibold">الرؤية 1 – السوق</h3>
+            <p class="m-0 text-sm">أن نكون الجسر الرقمي الأكثر موثوقية الذي يربط بين الابتكار والإنجاز في السوق المصري.</p>
           </div>
-        </article>
+          <div class="card p-4">
+            <h3 class="m-0 text-base font-semibold">الرؤية 2 – الجودة الانتقائية</h3>
+            <p class="m-0 text-sm">أن نصنع قيمة حقيقية لعملائنا المؤثرين عبر حلول منتقاة بعناية، حيث تُعرَّف الإنجازات بالجودة والثقة.</p>
+          </div>
+        </div>
+      </section>
 
-        <article id="license" class="mt-6 prose prose-sm max-w-none">
-          <h2>ملاحظات ونصائح</h2>
-          <p>الصفحة خفيفة وتعمل بدون بنية أو أدوات بناء. لو تريد أضيف أقسام docs إضافية أو دمج Markdown→HTML أستطيع أضيف سكربت تحويل بسيط.</p>
-        </article>
+      <!-- Mission -->
+      <section id="mission">
+        <h2>رسالتنا</h2>
+        <p>نكون البوابة التي تعبر منها الأفكار إلى واقعٍ ملموس. نمزج الخبرة التقنية والهندسية حيث تصنع الأثر الحقيقي، ونبسّط الرحلة من الفكرة إلى التشغيل، بجودة تُقاس بالأثر لا بالعدد.</p>
+      </section>
+
+      <!-- Values -->
+      <section id="values">
+        <h2>قيمنا</h2>
+        <ul>
+          <li>الموثوقية</li>
+          <li>الشفافية</li>
+          <li>الإبداع</li>
+          <li>الجودة</li>
+          <li>الالتزام</li>
+        </ul>
+      </section>
+
+      <!-- Services -->
+      <section id="services">
+        <h2>خدماتنا</h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="card p-5">
+            <h3 class="mb-2 font-semibold">الخدمات الرقمية</h3>
+            <ul class="space-y-3 text-sm">
+              <li class="rounded-lg bg-slate-50 p-3">
+                <div class="font-medium">تطوير أنظمة ERP (Dolibarr Customization)</div>
+                <div class="text-slate-600">حلول ERP مفتوحة المصدر على مقاس المؤسسة، تدعم العمليات المحلية وتقارير الحوكمة.</div>
+              </li>
+              <li class="rounded-lg bg-slate-50 p-3">
+                <div class="font-medium">استشارات التحول الرقمي</div>
+                <div class="text-slate-600">إعادة تصميم العمليات للانتقال الذكي إلى بيئة رقمية مستدامة.</div>
+              </li>
+              <li class="rounded-lg bg-slate-50 p-3">
+                <div class="font-medium">حوكمة وإدارة المشروعات</div>
+                <div class="text-slate-600">PMO عملي وضمان تسليم بقياسات أداء واضحة عبر دورة حياة المشروع.</div>
+              </li>
+              <li class="rounded-lg bg-slate-50 p-3">
+                <div class="font-medium">منصات التعليم وإدارة المحتوى</div>
+                <div class="text-slate-600">تصميم منصات تعليمية بمسار تعلم سلس وإدارة محتوى محكمة.</div>
+              </li>
+            </ul>
+          </div>
+          <div class="card p-5">
+            <h3 class="mb-2 font-semibold">الخدمات الهندسية</h3>
+            <ul class="space-y-3 text-sm">
+              <li class="rounded-lg bg-slate-50 p-3">
+                <div class="font-medium">حلول صناعية مخصصة</div>
+                <div class="text-slate-600">تصميم وتنفيذ مستلزمات صناعية حسب المواصفات.</div>
+              </li>
+              <li class="rounded-lg bg-slate-50 p-3">
+                <div class="font-medium">هياكل الطاقة الشمسية</div>
+                <div class="text-slate-600">هياكل معدنية وأنظمة تثبيت لمشروعات الخلايا الشمسية.</div>
+              </li>
+              <li class="rounded-lg bg-slate-50 p-3">
+                <div class="font-medium">كبائن شاشات العرض الإعلانية</div>
+                <div class="text-slate-600">تصميم كبائن داخلية/خارجية مع سهولة الصيانة والملحقات.</div>
+              </li>
+              <li class="rounded-lg bg-slate-50 p-3">
+                <div class="font-medium">حلول ميكانيكية مبتكرة</div>
+                <div class="text-slate-600">تصميمات خاصة لتحديات هندسية غير نمطية.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects">
+        <h2>مشروعاتنا</h2>
+        <p class="text-slate-600">كل مشروع عندنا هو أداة عملية تقرّب العملاء من واقع رقمي حقيقي — بعضها جاهز وبعضها قيد التطوير، لكنها كلها تصب في بناء الجسر الصحيح.</p>
+        <div class="grid gap-4 md:grid-cols-2">
+          <a href="https://github.com/Digital-Pins/dolibarr-custom" target="_blank" rel="noopener noreferrer" class="card group block p-5 transition hover:shadow-md">
+            <div class="mb-1 badge">ERP</div>
+            <div class="mb-1 text-lg font-semibold group-hover:underline">Digital PIN Custom ERP</div>
+            <p class="m-0 text-sm text-slate-700">منصة ERP مبنية على Dolibarr ومخصصة للسوق المصري — توحّد الأقسام على نظام واحد واضح.</p>
+          </a>
+          <a href="https://github.com/Digital-Pins/cms-digital-pin" target="_blank" rel="noopener noreferrer" class="card group block p-5 transition hover:shadow-md">
+            <div class="mb-1 badge">CMS</div>
+            <div class="mb-1 text-lg font-semibold group-hover:underline">Digital PIN CMS</div>
+            <p class="m-0 text-sm text-slate-700">نظام إدارة محتوى خفيف يضع المعلومة في مكانها الصحيح ويُحسّن الوصول والشفافية.</p>
+          </a>
+          <a href="https://github.com/Digital-Pins/pin-kit" target="_blank" rel="noopener noreferrer" class="card group block p-5 transition hover:shadow-md">
+            <div class="mb-1 badge">AI / PM</div>
+            <div class="mb-1 text-lg font-semibold group-hover:underline">PIN‑KIT – مساعد إدارة المشاريع</div>
+            <p class="m-0 text-sm text-slate-700">مساعد وظيفي مؤتمت يسطّح التعقيد ويقدّم القرار وقت الحاجة ليحافظ على مسار التسليم.</p>
+          </a>
+          <a href="https://github.com/Digital-Pins/pinlearn-project" target="_blank" rel="noopener noreferrer" class="card group block p-5 transition hover:shadow-md">
+            <div class="mb-1 badge">E‑Learning</div>
+            <div class="mb-1 text-lg font-semibold group-hover:underline">PinLearn Project</div>
+            <p class="m-0 text-sm text-slate-700">منصة تعليمية تعيد تشكيل تجربة التعلم لتكون رحلة واضحة وسهلة.</p>
+          </a>
+          <a href="https://github.com/Digital-Pins/pinpin" target="_blank" rel="noopener noreferrer" class="card group block p-5 transition hover:shadow-md">
+            <div class="mb-1 badge">Aviation</div>
+            <div class="mb-1 text-lg font-semibold group-hover:underline">PinPin – معالجة بيانات الملاحة الجوية</div>
+            <p class="m-0 text-sm text-slate-700">يحّول بيانات الملاحة الفنية والإدارية إلى معلومات قابلة للاستخدام والقرار.</p>
+          </a>
+          <a href="https://github.com/Digital-Pins/Digital-PIN-placement-group" target="_blank" rel="noopener noreferrer" class="card group block p-5 transition hover:shadow-md">
+            <div class="mb-1 badge">Elite</div>
+            <div class="mb-1 text-lg font-semibold group-hover:underline">Digital PIN Placement Group</div>
+            <p class="m-0 text-sm text-slate-700">مبادرة انتقائية لعملاء مؤثرين — حلول عالية الأثر حيث تُقاس القيمة بالجودة لا بالعدد.</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- Incubator -->
+      <section id="incubator">
+        <h2>البيئة الحاضنة (Dev Hub)</h2>
+        <p>تنمو مشروعاتنا داخل بيئة منضبطة تجمع بين <span class="font-medium">GitHub</span> للكود والوثائق، و<span class="font-medium">Dev‑Hub</span> للاختبار وما قبل الإنتاج. هذه الحاضنة تضمن التتبّع الكامل، والجودة، والاستمرارية.</p>
+        <ul class="list-disc ps-6">
+          <li>Traceability من البداية للنهاية: كود، وثائق، Issues، وإصدارات موحّدة.</li>
+          <li>مراجعات كود وخطوط CI/CD قبل الإطلاق.</li>
+          <li>أمان: صلاحيات دقيقة، فروع محمية، وفحص تبعيات.</li>
+          <li>مكتبة Modules وPrototypes قابلة لإعادة الاستخدام.</li>
+          <li>توثيق حي: README، Wikis، Changelogs.</li>
+          <li>مساحات خاصة للعملاء: مستودعات خاصة وبيئات Staging آمنة.</li>
+        </ul>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a class="focus-ring rounded-md border px-3 py-2 text-sm font-medium hover:bg-slate-50" href="https://github.com/Digital-Pins" target="_blank" rel="noopener noreferrer">زيارة منظمة GitHub</a>
+          <a class="focus-ring rounded-md border px-3 py-2 text-sm font-medium hover:bg-slate-50" href="https://erp.digitalpin.online" target="_blank" rel="noopener noreferrer">فتح DevHub (Staging)</a>
+        </div>
+      </section>
+
+      <!-- Partners -->
+      <section id="partners">
+        <h2>شركاؤنا</h2>
+        <div class="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+          <div class="card flex items-center justify-center p-4 text-sm font-medium">OpenAI</div>
+          <div class="card flex items-center justify-center p-4 text-sm font-medium">Hetzner</div>
+          <div class="card flex items-center justify-center p-4 text-sm font-medium">GitHub</div>
+          <div class="card flex items-center justify-center p-4 text-sm font-medium">GitLab</div>
+          <div class="card flex items-center justify-center p-4 text-sm font-medium">Cloudflare</div>
+          <div class="card flex items-center justify-center p-4 text-sm font-medium">Oracle Cloud</div>
+        </div>
+      </section>
+
+      <!-- Management -->
+      <section id="management">
+        <h2>الهيكل الإداري</h2>
+        <ul>
+          <li><span class="font-medium">محمد عفيفي</span> — المدير العام ومستشار إدارة مشروعات</li>
+          <li>فريق متخصص في التطوير البرمجي والهندسي</li>
+          <li>شبكة شركاء وموردين محليين موثوقين</li>
+        </ul>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact">
+        <h2>التواصل</h2>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="card p-4">
+            <div class="text-sm text-slate-600">Website</div>
+            <a href="https://4egtrust.com" target="_blank" rel="noopener noreferrer" class="text-lg font-medium linkish">4egtrust.com</a>
+            <div class="text-sm text-slate-600 mt-3">Mob</div>
+            <a href="tel:+1119873888" class="text-lg font-medium linkish">+111 987 3 888</a>
+          </div>
+          <div class="card p-4">
+            <div class="text-sm text-slate-600">Email</div>
+            <a href="mailto:info@4egtrust.com" class="text-lg font-medium linkish">info@4egtrust.com</a>
+          </div>
+          <div class="card p-4">
+            <div class="text-sm text-slate-600">Address</div>
+            <div class="text-lg font-medium">Cairo, Egypt</div>
+          </div>
+          <div class="card p-4">
+            <div class="text-sm text-slate-600">Phone</div>
+            <a href="tel:+223140730" class="text-lg font-medium">+223140730</a>
+          </div>
+        </div>
       </section>
     </main>
-
-    <footer class="mt-8 text-sm text-slate-500 text-center">
-      © Digital PIN — صفحة توثيق ثابتة
-    </footer>
   </div>
 
+  <!-- Footer -->
+  <footer class="border-t py-8">
+    <div class="mx-auto max-w-7xl px-4 text-sm text-slate-500 md:px-6">
+      © <span id="year"></span> Digital PIN LLC — Docs‑style interface. جميع الحقوق محفوظة.
+    </div>
+  </footer>
+
   <script>
-    // Language toggle: switches document direction and some visible text
-    (function(){
-      const btn = document.getElementById('toggleLang');
-      const title = document.getElementById('site-title');
-      const root = document.documentElement;
-      const saved = localStorage.getItem('dp_lang');
-      function apply(lang){
-        if(lang === 'en'){
-          root.setAttribute('dir','ltr');
-          root.setAttribute('lang','en');
-          title.textContent = 'Digital PIN — Docs';
-          document.querySelectorAll('.rtl-only').forEach(el=>el.style.display='none');
-          document.querySelectorAll('.ltr-only').forEach(el=>el.style.display='block');
-          btn.setAttribute('aria-pressed','true');
-          localStorage.setItem('dp_lang','en');
-        } else {
-          root.setAttribute('dir','rtl');
-          root.setAttribute('lang','ar');
-          title.textContent = 'Digital PIN — وثائق';
-          document.querySelectorAll('.rtl-only').forEach(el=>el.style.display='block');
-          document.querySelectorAll('.ltr-only').forEach(el=>el.style.display='none');
-          btn.setAttribute('aria-pressed','false');
-          localStorage.setItem('dp_lang','ar');
-        }
-      }
-      // init
-      apply(saved === 'en' ? 'en' : 'ar');
-      btn.addEventListener('click', ()=>{
-        apply(document.documentElement.lang === 'ar' ? 'en' : 'ar');
-      });
-    })();
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Language toggles
+    const btnAR = document.getElementById('btn-ar');
+    const btnEN = document.getElementById('btn-en');
+    btnAR.addEventListener('click',()=>{
+      document.documentElement.lang='ar';
+      document.documentElement.dir='rtl';
+    });
+    btnEN.addEventListener('click',()=>{
+      document.documentElement.lang='en';
+      document.documentElement.dir='ltr';
+    });
   </script>
 </body>
 </html>
