@@ -6,8 +6,16 @@
   <title>Digital PIN LLC — Docs Hub</title>
   <meta name="description" content="Digital PIN LLC — Docs-style front interface for our GitHub & Dev Hub" />
   <!-- Tailwind CDN -->
+  <!-- Google Fonts: Almarai (Arabic) and Montserrat (Latin) -->
+  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    /* Font setup: Montserrat for Latin/EN, Almarai for Arabic */
+    html{font-family:'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+    html[lang="ar"]{font-family:'Almarai', system-ui, 'Noto Naskh Arabic', 'Segoe UI', Arial}
+    /* ensure LTR-only English snippets use Montserrat */
+    .ltr-only{font-family:'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
+
     :root{
       --dp-blue:#0A47A3; /* primary blue */
       --dp-green:#09A66D; /* bridge green */
