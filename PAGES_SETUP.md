@@ -42,3 +42,13 @@ Notes and next steps (assistant as partner)
 Tell me which next step you want me to take and I'll perform it and record the action here.
 
 Record: action executed by assistant on 2025-08-26
+
+CI: automatic Pages deploy
+------------------------
+I added a lightweight GitHub Actions workflow at .github/workflows/pages.yml which:
+
+- runs on push to main
+- copies index.html into public/ and uploads it as the Pages artifact
+- deploys the artifact using actions/deploy-pages (uses GITHUB_TOKEN automatically)
+
+After push, Actions will create the Pages build. You can monitor the run in the repo's Actions tab.
